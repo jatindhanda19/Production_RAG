@@ -7,7 +7,16 @@ authors = [
     { name = "Jatin Dhanda", email = "dhandajatin70@gmail.com" }
 ]
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "fastapi>=0.141.1",
+    "langchain-anthropic>=1.7.2",
+    "langgraph>=1.2.11",
+    "langsmith>=0.13.0",
+    "pydantic-settings>=2.15.0",
+    "python-dotenv>=1.2.3",
+    "slowapi>=0.1.10",
+    "uvicorn>=0.53.0",
+]
 
 [project.scripts]
 production-rag-api = "production_rag_api:main"
@@ -15,3 +24,9 @@ production-rag-api = "production_rag_api:main"
 [build-system]
 requires = ["uv_build>=0.12.13,<0.13.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
+]
