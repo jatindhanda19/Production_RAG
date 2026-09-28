@@ -1,5 +1,9 @@
 from pydantic_settings import BaseSettings
 from functools import lru_cache
+from dotenv import load_dotenv
+
+# LangSmith reads its config (LANGSMITH_*) from os.environ, not from Settings
+load_dotenv()
 
 
 class Settings(BaseSettings):
@@ -7,9 +11,9 @@ class Settings(BaseSettings):
     primary_model: str = "openai/gpt-oss-120b"
     fallback_model:str = "openai/gpt-oss-20b"
 
-    langchain_tracing_v2: bool = True
-    langchain_api_key: str = ""
-    langchain_project: str = "production-api"
+    langsmith_tracing: bool = True
+    langsmith_api_key: str = ""
+    langsmith_project: str = "production-api"
 
     app_env: str = "development"
     log_level:str = "INFO"

@@ -2,7 +2,7 @@ from typing import Optional
 from typing_extensions import TypedDict, Annotated
 from langgraph.graph import StateGraph, START, END
 from langgraph.graph.message import add_messages
-from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage, AIMessage, BaseMessage
 from langsmith import traceable
 
@@ -19,17 +19,20 @@ class ProductionAgent:
     def __init__(self):
         settings = get_settings()
 
-        self.primary_llm = ChatOpenAI(
+        self.primary_llm = ChatGroq(
             model= settings.primary_model,
-            temprature=0,
+            temperature=0,
             timeout=30,
-            max_retries=0
+            max_retries=0,
+            api_key=settings.groq_api_key,
         )
 
-        self.fallback_llm = ChatOpenAI(
+        self.fallback_llm = ChatGroq(
             model=settings.fallback_model,
-            temprature=0,
+            temperature=0,
             timeout=30,
+            max_retries=0,
+            api_key=settings.groq_api_key,
         )
         self.max_retries = settings.max_retries
         self.graph = self._build_graph()
@@ -68,8 +71,8 @@ class ProductionAgent:
                 return{
                     "messages": [
                         AIMessage(content=(
-                            "I'm Sorry, I'm having trouble processing your request"
-                            "right now. Please  try again in a moment"
+                            "I'm sorry, I'm having trouble processing your request "
+                            "right now. Please try again in a moment."
                         ))
                     ],
                     "model_used": "error_handler",
@@ -111,17 +114,18 @@ class ProductionAgent:
     @traceable(name="production_agent_invoke")
     def invoke(self, message:str) -> dict:
 
-         result = self.graph.invoke({
-              "messages": [HumanMessage(content=message)],
-              "error": None,
-              "retry_count": 0,
-              "model_used": "",
-         })
-         return{
-              "response": result["messages"][-1].content,
-              "model_used": result.get("model_used","unknown"),
-              "error": result.get("error"),
-         }
+             result = self.graph.invoke({
+                  "messages": [HumanMessage(content=message)],
+                  "error": None,
+                  "retry_count": 0,
+                  "model_used": "",
+             })
+
+             return{
+                  "response": result["messages"][-1].content,
+                  "model_used": result.get("model_used","unknown"),
+                  "error": result.get("error"),
+             }
 
 
                       

@@ -6,7 +6,7 @@ from langsmith import traceable
 
 class InputSanitizer:
     INJECTION_PATTERNS = [
-        r"ignore\s+(all\s+)?previous\s+instructions",
+        r"ignore\s+(all\s+)?previous\s+instructions?",
         r"forget\s+(all\s+)?previous",
         r"new\s+instructions",
         r"system\s+prompt",
