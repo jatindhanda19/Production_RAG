@@ -17,7 +17,7 @@ from pathlib import Path
 
 API_URL = os.environ.get("API_URL", "http://localhost:8000").rstrip("/")
 PORT = int(os.environ.get("PORT", "5173"))
-STATIC_DIR = Path(__file__).parent
+STATIC_DIR = Path(__file__).parent / "public"
 
 # The agent may try the primary and then the fallback model, 30s timeout each
 PROXY_TIMEOUT = 120
