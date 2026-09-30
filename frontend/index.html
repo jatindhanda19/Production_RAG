@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RAG Chat</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="shapes" aria-hidden="true">
+    <div class="shape s1" data-depth="40"><div class="bob"><div class="cube-stage"><div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div></div>
+    <div class="shape s2" data-depth="75"><div class="bob"><div class="cube-stage"><div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div></div>
+    <div class="shape s3" data-depth="25"><div class="bob"><div class="cube-stage"><div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div></div>
+    <div class="shape s4" data-depth="55"><div class="bob"><div class="sphere"></div></div></div>
+    <div class="shape s5" data-depth="30"><div class="bob"><div class="sphere"></div></div></div>
+    <div class="shape s6" data-depth="90"><div class="bob"><div class="sphere"></div></div></div>
+    <div class="shape s7" data-depth="45"><div class="bob"><div class="ring"></div></div></div>
+    <div class="shape s8" data-depth="65"><div class="bob"><div class="ring"></div></div></div>
+  </div>
+
+  <main class="stage">
+    <section class="chat" id="chat" aria-label="Chat">
+      <div class="chat-floor" aria-hidden="true"></div>
+
+      <header class="plate chat-head">
+        <div class="brand">
+          <div class="cube-stage" aria-hidden="true">
+            <div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <h1>RAG Chat</h1>
+        </div>
+        <button class="btn" id="newChat" type="button">New chat</button>
+      </header>
+
+      <div class="messages" id="messages" aria-live="polite">
+        <div class="empty" id="empty">
+          <h2>Ask me anything</h2>
+          <div class="suggestions">
+            <button type="button" class="chip-btn">Explain RAG in three sentences</button>
+            <button type="button" class="chip-btn">What is a LangGraph state graph?</button>
+            <button type="button" class="chip-btn">Write a haiku about caching</button>
+          </div>
+        </div>
+      </div>
+
+      <form class="plate composer" id="composer">
+        <div class="well">
+          <textarea id="input" rows="1" maxlength="10000" placeholder="Message…" aria-label="Message"></textarea>
+        </div>
+        <button class="send" id="send" type="submit" aria-label="Send message" disabled>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 12l15-7-5 15-3-6-7-2z" fill="currentColor"/></svg>
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
